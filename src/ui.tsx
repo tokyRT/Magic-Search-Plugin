@@ -2,21 +2,22 @@ import { render } from "@create-figma-plugin/ui";
 import { emit } from "@create-figma-plugin/utilities";
 import { h } from "preact";
 import { useEffect } from "preact/hooks";
-import styled from 'styled-components';
-
-
+import styles from "./styles/global.css";
+import MagicIconWhite from "./assets/magic-icon-white.svg";
+import Nav from "./components/nav/nav";
+import Footer from "./components/footer/footer";
+import CardList from "./components/card-list/card-list";
 
 function Plugin() {
   return (
-    <App>
-      <h1>Magic Search plugin</h1>
-    </App>
+    <div class={styles.app}>
+      <Nav />
+      <img src={MagicIconWhite} class={styles.imgBackground} />
+      <div class={styles.body}>
+        <CardList />
+      </div>
+      <Footer />
+    </div>
   );
 }
 export default render(Plugin);
-
-const App = styled.div`
-  background-color: white;
-  color: black;
-  height: 100%;
-`;

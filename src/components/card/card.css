@@ -1,0 +1,9 @@
+.card {
+    width: calc(50% - 8px);
+    border-radius: 13px;
+    overflow: hidden;
+    
+}
+.card_img {
+    width: 100%;
+}
