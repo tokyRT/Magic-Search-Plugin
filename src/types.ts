@@ -6,3 +6,7 @@ export type TMagicCard = {
     name?: string;
 }
 
+export interface AddCardsHandler extends EventHandler {
+    name: 'ADD_CARDS',
+    handler: (cards: TMagicCard[]) => void
+}

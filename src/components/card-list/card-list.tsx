@@ -1,8 +1,10 @@
 import { h } from "preact";
 import Card from "@/components/card/card";
 import styles from "./card-list.css";
-import { useState } from "preact/hooks";
-import { TMagicCard } from "@/types";
+import { useEffect, useState } from "preact/hooks";
+import { AddCardsHandler, TMagicCard } from "@/types";
+import DownloadIcon from "@/assets/download-icon";
+import { emit } from "@create-figma-plugin/utilities";
 
 export default function CardList() {
   const [selectedCards, setSelectedCards] = useState<string[]>([]);
@@ -17,6 +19,11 @@ export default function CardList() {
     } else {
       setSelectedCards([...selectedCards, card.id]);
     }
+  };
+
+  const handleAddCards = () => {
+    const cards = magicCards.filter((card) => selectedCards.includes(card.id))
+    emit<AddCardsHandler>('ADD_CARDS', cards)
   }
   return (
     <div class={styles.list}>
@@ -28,6 +35,15 @@ export default function CardList() {
           onClick={() => handleSelectCard(card)}
         />
       ))}
+      {selectedCards.length > 0 && (
+        <div class={styles.list_button} onClick={handleAddCards}>
+          <DownloadIcon />
+          <span>
+            Import {selectedCards.length}
+            {selectedCards.length > 1 ? " Images" : " Image"}
+          </span>
+        </div>
+      )}
     </div>
   );
 }
