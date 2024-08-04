@@ -1,0 +1,43 @@
+.nav{
+    width: 100%;
+    padding: 12px;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+.nav_inner{
+    background-color: white;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    border: 1px solid transparent;
+    transition: border 0.2s;
+}
+.nav_innerFocused {
+    border: 1px solid var(--magic-purple);
+}
+.nav_inner_input{
+    width: 100%;
+    background-color: transparent;
+    font-weight: 500;
+    padding: 0 7px;
+    cursor: text;
+    height: 34px;
+}
+.nav_inner_buttonGroup{
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    background: linear-gradient(180deg, #7A7878 0%, #1F1F1F 100%);
+}
+.nav_inner_buttonGroup a {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 34px;
+    padding: 0 9px;
+    text-decoration: none;
+}

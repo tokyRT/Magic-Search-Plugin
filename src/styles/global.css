@@ -1,0 +1,22 @@
+.app {
+    --magic-gradient: linear-gradient(180deg, #FC48A2 0%, #6B3483 100%);
+    --magic-purple: #F447A1;
+    --magic-body-color: #1D1D1F;
+    background-color: #E7E7E7;
+    min-height: 100%;
+    position: relative;
+}
+.app *{
+    color: var(--magic-body-color);
+    box-sizing: border-box;
+}
+.imgBackground{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.body{
+    padding: 80px 12px;
+    /* background-color: white; */
+}
