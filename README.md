@@ -1,4 +1,4 @@
-# Preact Rectangles
+# Magic The Gathering cards searcher for Figma
 
 ## Development guide
 
