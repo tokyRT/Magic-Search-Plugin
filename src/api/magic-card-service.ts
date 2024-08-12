@@ -6,7 +6,7 @@ export const searchCards = async (query: string): Promise<TMagicCard[]> => {
   const cards: TMagicCard[] = [];
   const response = await fetch(`${SCRYFALL_API}/cards/search?q=${query}`);
   if(response.status !== 200) return cards;
-  
+
   const data = await response.json();
   let i = 0;
   for (const card of data.data) {
@@ -36,8 +36,6 @@ export const searchCards = async (query: string): Promise<TMagicCard[]> => {
         });
         i++;
       }
-      console.log('card with faces', card);
-      
     }
   }
 
