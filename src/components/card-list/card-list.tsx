@@ -2,9 +2,15 @@ import { h } from "preact";
 import Card from "@/components/card/card";
 import styles from "./card-list.css";
 import { useEffect, useState } from "preact/hooks";
-import { AddCardsHandler, TImageUris, TMagicCard } from "@/types";
+import {
+  AddCardsHandler,
+  GetSavedSearchHandler,
+  SaveSearchHandler,
+  TImageUris,
+  TMagicCard,
+} from "@/types";
 import DownloadIcon from "@/assets/download-icon";
-import { emit } from "@create-figma-plugin/utilities";
+import { emit, once } from "@create-figma-plugin/utilities";
 import { searchCards } from "@/api/magic-card-service";
 
 interface ICardListProps {
@@ -27,14 +33,17 @@ export default function CardList({ searchQuery }: ICardListProps) {
     const cards = magicCards.filter((card) => selectedCards.includes(card.id));
     emit<AddCardsHandler>("ADD_CARDS", cards);
   };
-
   useEffect(() => {
-    console.log("LIST searchQuery", searchQuery);
+    // get saved search
+    once<GetSavedSearchHandler>("GET_SAVED_SEARCH", (cards) => {
+      setMagicCards(cards);
+    });
+  }, []);
+  useEffect(() => {
     if (searchQuery.length > 0) {
-      console.log("encodeURI", encodeURI(searchQuery));
-
       searchCards(encodeURI(searchQuery)).then((cards) => {
         setMagicCards(cards);
+        emit<SaveSearchHandler>("SAVE_SEARCH", cards);
       });
     }
   }, [searchQuery]);

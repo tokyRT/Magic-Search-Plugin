@@ -1,5 +1,10 @@
-import { once, showUI } from "@create-figma-plugin/utilities";
-import { AddCardsHandler, TMagicCard } from "./types";
+import { emit, once, showUI } from "@create-figma-plugin/utilities";
+import {
+  AddCardsHandler,
+  GetSavedSearchHandler,
+  SaveSearchHandler,
+  TMagicCard,
+} from "./types";
 import { addNodeToFigma } from "./utilities";
 
 export default function () {
@@ -44,6 +49,15 @@ export default function () {
     figma.closePlugin();
   });
 
+  once<SaveSearchHandler>("SAVE_SEARCH", async (cards) => {
+    await figma.clientStorage.setAsync("magic-last-search", cards);
+  });
+  
+  figma.clientStorage.getAsync("magic-last-search").then((cards) => {
+    if (cards) {
+      emit<GetSavedSearchHandler>("GET_SAVED_SEARCH", cards);
+    }
+  });
   showUI({
     height: 880,
     width: 550,
