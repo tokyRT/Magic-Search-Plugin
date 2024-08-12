@@ -1,5 +1,15 @@
-# Preact Rectangles
-
+# MTG (Magic The Gathering) cards searcher for Figma
+![demo.gif](./docs/demo.gif)
+## About 
+This plugin is for MTG fans who want to make Figma project around the famous MTG game. 
+The plugin is used to insert MTG cards directly to Figma without leaving the software.
+## Features
+- [x] Search any MTG cards
+- [x] Insert selected cards to current page  
+  - [x] creates an auto layout frame if multiple cards are inserted
+  - [x] selected cards are inserted inside the selected frame or group
+- [ ] Handle Scryfall syntax for specific search
+- [ ] I am feel lucky feature
 ## Development guide
 
 *This plugin is built with [Create Figma Plugin](https://yuanqing.github.io/create-figma-plugin/).*
