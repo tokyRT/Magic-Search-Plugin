@@ -4,13 +4,15 @@ import { TMagicCard } from "@/types";
 import CheckIcon from "@/assets/check-icon";
 
 interface ICardProps {
-  magicCard: TMagicCard;
+  magicCardId?: string;
+  image: string;
   selected?: boolean;
   onClick?: () => void;
 }
 
 export default function Card({
-  magicCard,
+  magicCardId,
+  image,
   selected,
   onClick,
 }: ICardProps) {
@@ -19,7 +21,7 @@ export default function Card({
       class={styles.card}
       onClick={() => onClick && onClick()}
     >
-      <img src={magicCard.img} class={styles.card_img} />
+      <img src={image} class={styles.card_img} />
       {selected && (
         <div class={styles.card_overlay}>
           <CheckIcon />

@@ -6,7 +6,7 @@ export default function () {
     const nodes: Array<SceneNode> = [];
     cards.forEach((card) => {
 
-      figma.createImageAsync(card.img).then(async (image: Image) => {
+      figma.createImageAsync(card.faces.normal).then(async (image: Image) => {
         const node = figma.createRectangle();
         const { width, height } = await image.getSizeAsync();
         node.resize(width, height);

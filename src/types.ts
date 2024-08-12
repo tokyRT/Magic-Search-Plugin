@@ -1,9 +1,14 @@
 import { EventHandler } from '@create-figma-plugin/utilities'
 
+export type TImageUris = {
+    normal: string,
+    png: string
+}
 export type TMagicCard = {
-    id: string;
-    img: string;
-    name?: string;
+    id: number;
+    scryfallId: string;
+    name: string;
+    faces: TImageUris;
 }
 
 export interface AddCardsHandler extends EventHandler {

@@ -2,37 +2,50 @@ import { h } from "preact";
 import Card from "@/components/card/card";
 import styles from "./card-list.css";
 import { useEffect, useState } from "preact/hooks";
-import { AddCardsHandler, TMagicCard } from "@/types";
+import { AddCardsHandler, TImageUris, TMagicCard } from "@/types";
 import DownloadIcon from "@/assets/download-icon";
 import { emit } from "@create-figma-plugin/utilities";
+import { searchCards } from "@/api/magic-card-service";
 
-export default function CardList() {
-  const [selectedCards, setSelectedCards] = useState<string[]>([]);
+interface ICardListProps {
+  searchQuery: string;
+}
 
-  const magicCards = Array.from({ length: 10 }).map((_, index) => ({
-    id: `${index}`,
-    img: "https://cards.scryfall.io/normal/front/f/e/fecbf0a3-ebe1-43b6-a720-462ba19002eb.jpg?1591227985",
-  }));
-  const handleSelectCard = (card: TMagicCard) => {
-    if (selectedCards.includes(card.id)) {
-      setSelectedCards(selectedCards.filter((id) => id !== card.id));
+export default function CardList({ searchQuery }: ICardListProps) {
+  const [selectedCards, setSelectedCards] = useState<number[]>([]);
+
+  const [magicCards, setMagicCards] = useState<TMagicCard[]>([]);
+  const handleSelectCard = (cardId: number) => {
+    if (selectedCards.includes(cardId)) {
+      setSelectedCards(selectedCards.filter((id) => id !== cardId));
     } else {
-      setSelectedCards([...selectedCards, card.id]);
+      setSelectedCards([...selectedCards, cardId]);
     }
   };
 
   const handleAddCards = () => {
-    const cards = magicCards.filter((card) => selectedCards.includes(card.id))
-    emit<AddCardsHandler>('ADD_CARDS', cards)
-  }
+    const cards = magicCards.filter((card) => selectedCards.includes(card.id));
+    emit<AddCardsHandler>("ADD_CARDS", cards);
+  };
+
+  useEffect(() => {
+    console.log("LIST searchQuery", searchQuery);
+    if (searchQuery.length > 0) {
+      console.log("encodeURI", encodeURI(searchQuery));
+
+      searchCards(encodeURI(searchQuery)).then((cards) => {
+        setMagicCards(cards);
+      });
+    }
+  }, [searchQuery]);
   return (
     <div class={styles.list}>
-      {magicCards.map((card, index) => (
+      {magicCards.map((card) => (
         <Card
-          key={index}
-          magicCard={card}
+          key={card.id}
+          image={card.faces.normal}
           selected={selectedCards.includes(card.id)}
-          onClick={() => handleSelectCard(card)}
+          onClick={() => handleSelectCard(card.id)}
         />
       ))}
       {selectedCards.length > 0 && (
