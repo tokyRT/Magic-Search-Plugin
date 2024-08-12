@@ -9,7 +9,7 @@ The plugin is used to insert MTG cards directly to Figma without leaving the sof
   - [x] creates an auto layout frame if multiple cards are inserted
   - [x] selected cards are inserted inside the selected frame or group
 - [ ] Handle Scryfall syntax for specific search
-- [ ] I am feel lucky feature
+- [ ] I am feeling lucky feature
 ## Development guide
 
 *This plugin is built with [Create Figma Plugin](https://yuanqing.github.io/create-figma-plugin/).*
