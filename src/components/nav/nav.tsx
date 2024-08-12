@@ -26,6 +26,9 @@ export default function Nav({setSearchQuery} : INavProps){
       inputRef.current?.blur();
     }
   }
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   return (
     <nav class={styles.nav}>
@@ -37,7 +40,6 @@ export default function Nav({setSearchQuery} : INavProps){
           class={styles.nav_inner_input}
           type="text"
           placeholder="Search for Magic Cards"
-          autoFocus
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           ref={inputRef}
